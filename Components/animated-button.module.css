@@ -1,0 +1,152 @@
+.button {
+  font-family: var(--font-secondary);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  /* min-height: 48px;
+  min-width: 120px; */
+  width: fit-content;
+}
+
+/* Removed simple hover background, now handled by overlay */
+.button:hover {
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 160, 227, 0.3);
+}
+
+/* Improved background overlay positioning for better directional fill from all sides */
+.backgroundOverlay {
+  position: absolute;
+  width: 60px; /* Increased initial size from 20px to 60px for better coverage when scaled */
+  height: 60px; /* Increased initial size from 20px to 60px for better coverage when scaled */
+  background: #00a0e3;
+  border-radius: 50%;
+  left: var(--mouse-x, 50%);
+  top: var(--mouse-y, 50%);
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:disabled:hover {
+  background: #000;
+  transform: none;
+  box-shadow: none;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 20px;
+  overflow: hidden;
+  /* Added z-index to keep content above background overlay */
+  z-index: 1;
+}
+
+.originalText {
+  display: block;
+  white-space: nowrap;
+}
+
+.bottomText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  display: block;
+}
+
+.symbol {
+  display: inline-block;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .button {
+    background: #fff;
+    color: #000;
+  }
+
+  .button:hover {
+    color: #fff;
+  }
+
+  .button:disabled:hover {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .button {
+    padding: 10px 20px;
+    font-size: 14px;
+    min-height: 44px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    padding: 8px 16px;
+    font-size: 14px;
+    min-height: 40px;
+    min-width: 80px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .button {
+    border: 2px solid currentColor;
+  }
+
+  .button:focus-visible {
+    outline: 3px solid #4a90e2;
+    outline-offset: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+
+  .button:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,95 @@
+/* components/InfiniteCarousel.module.css */
+
+/* CSS variables moved to the local wrapper so this file stays pure for CSS Modules */
+.wrapper {
+  --item-width: clamp(220px, 28vw, 360px);
+  --item-height: clamp(150px, 20vw, 240px);
+  --gap: 22px;
+  --duration: 18s; /* speed of scroll, larger = slower */
+  --card-radius: 28px;
+  --background: #fff9ed; /* page-like background to match screenshot */
+
+  position: relative;
+  /* padding: 36px 6%; */
+  background: var(--background);
+  overflow: visible;
+  padding-top: 100px;
+}
+
+/* hide overflow and mask the moving track */
+.scroller {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* inner track that scrolls — duplicated items should produce seamless loop */
+.scrollerInner {
+  display: flex;
+  gap: var(--gap);
+  align-items: center;
+  /* animation: moves from 0 to -50% of its own width (half = one full set) */
+  animation: scroll var(--duration) linear infinite;
+  will-change: transform;
+}
+
+/* pause on hover */
+.scroller:hover .scrollerInner {
+  animation-play-state: paused;
+}
+
+/* a single card */
+.card {
+  flex: 0 0 var(--item-width);
+  height: var(--item-height);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(12, 20, 30, 0.12);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(0, 0, 0, 0.02)
+  );
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* image inside card */
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  vertical-align: middle;
+}
+
+/* bottom fade (softly hides lower part similar to screenshot) */
+.bottomFade {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--item-height) * 0.9);
+  background: linear-gradient(transparent 10%, var(--background) 75%);
+}
+
+/* small responsive tweak to show partial cards on very small screens */
+@media (max-width: 480px) {
+  .wrapper {
+    --item-width: 200px;
+    --item-height: 140px;
+    --gap: 14px;
+    --duration: 14s;
+  }
+}
+
+/* Keyframes: move full duplicated track by 50% (so one original set moves out) */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}

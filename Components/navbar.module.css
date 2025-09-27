@@ -1,0 +1,438 @@
+/* navbar.module.css */
+
+/* ---------- NAVBAR BASE ---------- */
+.navbar {
+  width: 100%;
+  /* use CSS var for dynamic height */
+  --navbar-height: 80px;
+  height: var(--navbar-height);
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(30px);
+  font-family: var(--font-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  /* smooth transition when collapsing */
+  transition: background-color 0.25s ease, height 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.navbarCollapsed {
+  --navbar-height: 60px;
+  background-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 2px 10px rgba(17, 17, 17, 0.06);
+}
+
+.navContainer {
+  width: 80%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logoDiv a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoImg {
+  transition: transform 0.2s ease;
+}
+.navbarCollapsed .logoImg {
+  transform: scale(0.9);
+}
+
+/* ---------- NAV LINKS (flip effect) ---------- */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+/* tighter spacing when collapsed */
+.navbarCollapsed .navLinks {
+  gap: 20px;
+}
+
+.flipLink {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  text-decoration: none;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--Primary-Black, #111);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 6px 2px;
+}
+
+.flipInner {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+  height: 1.2em;
+  line-height: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.flipRow {
+  display: block;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.top {
+  position: relative;
+  transform: translateY(0);
+  z-index: 1;
+}
+
+.bottom {
+  position: absolute;
+  inset: 0;
+  top: 0;
+  left: 0;
+  transform: translateY(100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.char {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+}
+/* slightly smaller label when collapsed */
+.navbarCollapsed .char {
+  font-size: 0.95rem;
+}
+
+.active {
+  color: var(--Primary-Blue, #0a66ff);
+  border-bottom: 1px solid var(--Primary-Blue, #0a66ff);
+  padding-bottom: 4px;
+}
+
+.flipLink:hover {
+  color: var(--Primary-Blue, #0a66ff);
+}
+
+/* Contact button */
+.navContacts .contactButton {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 6px;
+  background: var(--Primary-Blue, #0a66ff);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.navContacts .contactButton:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.contactButton {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 6px;
+  background: var(--Primary-Blue, #0a66ff);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+/* compact contact button in collapsed state */
+.navbarCollapsed .contactButton {
+  padding: 8px 14px;
+}
+
+.contactButton:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* hide desktop-only areas on small screens */
+.hideOnMobile {
+  display: flex;
+}
+
+@media (max-width: 880px) {
+  .hideOnMobile {
+    display: none !important;
+  }
+}
+
+/* mobile hamburger button */
+.menuToggle {
+  display: none;
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+  border: none;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.burger {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.burgerLine {
+  width: 22px;
+  height: 2px;
+  background: var(--Primary-Black, #111);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.menuToggle.open .burgerLine:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menuToggle.open .burgerLine:nth-child(2) {
+  opacity: 0;
+}
+
+.menuToggle.open .burgerLine:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 880px) {
+  .menuToggle {
+    display: inline-flex;
+  }
+}
+
+/* mobile overlay behind the slide-down menu */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* darken backdrop when menu is open so background is slightly black */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 9998;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* mobile menu panel */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: auto;
+  height: 100vh;
+  width: 100vw; /* full viewport width in collapsed/mobile view */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(30px);
+  transform: translateX(-100%); /* offscreen to the left */
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+  z-index: 10000; /* above navbar */
+  padding: 24px 6%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+/* top row inside mobile drawer for the logo */
+.mobileTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* move close button to the right */
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 12px;
+}
+
+/* add header row and close button for the mobile drawer */
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 12px;
+}
+
+.closeButton {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  color: #111;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 28px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+.closeButton:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.6);
+  outline-offset: 2px;
+}
+
+/* stack mobile nav links vertically with spacing */
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* Make each FlipLink occupy its own line in the drawer */
+.mobileLinks .flipLink {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+}
+
+/* Optional: keep contact section separated from links */
+.mobileContacts {
+  margin-top: 8px;
+}
+
+/* open state: slide to 0 and fade in */
+.mobileMenu.open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .mobileMenu {
+    transition: none;
+  }
+}
+
+/* tweak sizes for very small screens */
+@media (max-width: 560px) {
+  .mobileMenu {
+    padding: 14px 4%;
+    gap: 12px;
+  }
+  .char {
+    font-size: 0.9rem;
+  }
+}
+
+/* ensure navbar container adapts on smaller screens */
+@media (max-width: 880px) {
+  .navContainer {
+    width: 92%;
+  }
+}
+
+/* add fade-in-from-right animation when navbar becomes collapsed */
+@keyframes navbarFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(12px); /* start slightly to the right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Apply the animation to the inner container to avoid transform conflicts with framer-motion on the nav */
+.navbarCollapsed .navContainer {
+  animation: navbarFadeInRight 320ms ease-out both;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .navbarCollapsed .navContainer {
+    animation: none !important;
+  }
+}
+
+/* hide external hamburger when menu is open (used by JSX styles.hiddenWhileOpen) */
+@media (max-width: 880px) {
+  .hiddenWhileOpen {
+    display: none !important;
+  }
+}
+
+/* add visible close button inside the mobile drawer header */
+.closeBtn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  color: #111;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.closeBtn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.closeBtn:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.6);
+  outline-offset: 2px;
+}
+
+/* draw the "X" with two lines */
+.closeLine {
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  background: var(--Primary-Black, #111);
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.closeBtn .closeLine:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeBtn .closeLine:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
