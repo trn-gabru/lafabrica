@@ -4,10 +4,10 @@
 .navbar {
   width: 100%;
   /* use CSS var for dynamic height */
-  --navbar-height: 80px;
+  /* --navbar-height: 80px; */
   height: var(--navbar-height);
   z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(30px);
   font-family: var(--font-secondary);
   display: flex;

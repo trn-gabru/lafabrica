@@ -97,3 +97,15 @@
     )
     3;
 }
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .titleContainer p {
+    font-size: 0.8rem;
+  }
+}

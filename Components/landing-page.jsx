@@ -1,51 +1,46 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import styles from "./landing-page.module.css";
 
 export default function LandingAnimation({ onComplete }) {
   const [isVisible, setIsVisible] = useState(true);
+  const rootRef = useRef(null);
 
   useEffect(() => {
-    const windowwidth = window.innerWidth;
-    const wrapperWidth = 180;
-    const finalPosition = windowwidth - wrapperWidth;
-    const stepDistance = finalPosition / 6;
+    const root = rootRef.current;
+    if (!root) return;
 
-    const tl = gsap.timeline();
+    const counts = root.querySelectorAll(`.${styles.count}`);
+    const firstDigit = root.querySelector(`.${styles.digit}`);
+    const totalDigits = 6;
 
-    tl.to(`.${styles.count}`, {
-      x: -900,
-      duration: 0.85,
-      delay: 0.5,
-      ease: "power4.inOut",
+    // Measure the digit width to drive responsive animation distances
+    const measuredDigitWidth = firstDigit?.getBoundingClientRect().width || 180;
+
+    // Initialize positions based on the measured width (start fully offscreen to the left by 6 digits)
+    gsap.set(counts, { x: -measuredDigitWidth * totalDigits });
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power4.inOut", duration: 0.85 },
     });
 
-    for (let i = 1; i <= 6; i++) {
-      const xPosition = -900 + i * 180;
-      tl.to(`.${styles.count}`, {
-        x: xPosition,
-        duration: 0.85,
-        ease: "power4.inOut",
-        onStart: () => {
-          gsap.to(`.${styles.countWrapper}`, {
-            x: stepDistance * i,
-            duration: 0.85,
-            ease: "power4.inOut",
-          });
-        },
-      });
+    // Reveal sequence: move from -6w to -5w, ... to 0. Ensures last number is fully visible.
+    for (let i = 1; i <= totalDigits; i++) {
+      const xPosition = -measuredDigitWidth * (totalDigits - i); // ends at 0
+      tl.to(counts, { x: xPosition });
     }
 
+    // Prepare revealer svgs
     gsap.set(`.${styles.revealer} svg`, {
       scale: 0,
       xPercent: -100,
       yPercent: -90,
     });
-    const delays = [6, 6.5, 7];
 
-    document.querySelectorAll(`.${styles.revealer} svg`).forEach((el, i) => {
+    const delays = [6, 6.5, 7];
+    root.querySelectorAll(`.${styles.revealer} svg`).forEach((el, i) => {
       gsap.to(el, {
         scale: 42,
         xPercent: -320,
@@ -56,16 +51,14 @@ export default function LandingAnimation({ onComplete }) {
         onComplete: () => {
           if (i === delays.length - 1) {
             setIsVisible(false);
-            if (onComplete) {
-              onComplete();
-            }
+            onComplete?.();
           }
         },
       });
     });
 
-    // Animate header h1
-    const headerH1 = document.querySelector(`.${styles.header} h1`);
+    // Header and button animations (safe even if elements are missing)
+    const headerH1 = root.querySelector(`.${styles.header} h1`);
     if (headerH1) {
       gsap.to(headerH1, {
         rotateY: 0,
@@ -75,32 +68,23 @@ export default function LandingAnimation({ onComplete }) {
         delay: 8,
       });
     }
-    // Animate toggleBtn
-    const toggleBtn = document.querySelector(`.${styles.toggleBtn}`);
+
+    const toggleBtn = root.querySelector(`.${styles.toggleBtn}`);
     if (toggleBtn) {
-      gsap.to(toggleBtn, {
-        scale: 1,
-        duration: 1,
-        ease: "power4.inOut",
-      });
+      gsap.to(toggleBtn, { scale: 1, duration: 1, ease: "power4.inOut" });
     }
-    // Animate line p
-    document.querySelectorAll(`.${styles.line} p`).forEach((el) => {
-      gsap.to(el, {
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        stagger: 0.1,
-      });
+
+    root.querySelectorAll(`.${styles.line} p`).forEach((el) => {
+      gsap.to(el, { y: 0, duration: 1, ease: "power3.out", stagger: 0.1 });
     });
   }, [onComplete]);
 
   if (!isVisible) return null;
 
   return (
-    <div className={styles.landingContainer}>
+    <div className={styles.landingContainer} ref={rootRef} aria-live="polite">
       <div className={styles.container}>
-        <div className={styles.loader}>
+        <div className={styles.loader} role="img" aria-label="Intro animation">
           <div className={styles.countWrapper}>
             <div className={styles.count}>
               <div className={styles.digit}>
@@ -123,6 +107,7 @@ export default function LandingAnimation({ onComplete }) {
               </div>
             </div>
           </div>
+
           <div className={styles.countWrapper}>
             <div className={styles.count}>
               <div className={styles.digit}>
@@ -146,7 +131,10 @@ export default function LandingAnimation({ onComplete }) {
             </div>
           </div>
 
-          <div className={`${styles.revealer} ${styles.revealer1}`}>
+          <div
+            className={`${styles.revealer} ${styles.revealer1}`}
+            aria-hidden="true"
+          >
             <svg
               className={styles.svg}
               xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +160,11 @@ export default function LandingAnimation({ onComplete }) {
               </g>
             </svg>
           </div>
-          <div className={`${styles.revealer} ${styles.revealer2}`}>
+
+          <div
+            className={`${styles.revealer} ${styles.revealer2}`}
+            aria-hidden="true"
+          >
             <svg
               className={styles.svg}
               xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +190,11 @@ export default function LandingAnimation({ onComplete }) {
               </g>
             </svg>
           </div>
-          <div className={`${styles.revealer} ${styles.revealer3}`}>
+
+          <div
+            className={`${styles.revealer} ${styles.revealer3}`}
+            aria-hidden="true"
+          >
             <svg
               className={styles.svg}
               xmlns="http://www.w3.org/2000/svg"
@@ -226,22 +222,15 @@ export default function LandingAnimation({ onComplete }) {
           </div>
         </div>
 
+        {/* Optional UI elements retained for reference */}
         {/* <div className={styles.siteInfo}>
-          <div className={styles.line}>
-            <p>Digital & Brand Design</p>
-          </div>
-          <div className={styles.line}>
-            <p>Digital & Brand Photography</p>
-          </div>
+          <div className={styles.line}><p>Digital & Brand Design</p></div>
+          <div className={styles.line}><p>Digital & Brand Photography</p></div>
         </div>
-
         <div className={styles.toggleBtn}>
           <img className={styles.logoImg} src="/abstract-logo.jpg" alt="logo" />
         </div>
-
-        <div className={styles.header}>
-          <h1>LaFabrica</h1>
-        </div> */}
+        <div className={styles.header}><h1>LaFabrica</h1></div> */}
       </div>
     </div>
   );

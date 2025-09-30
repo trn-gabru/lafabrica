@@ -80,99 +80,131 @@ export default function Testimonials() {
 
     if (!flexContainer || cards.length === 0 || !testimonialGrid) return;
 
-    // 1. --- Calculate the target scroll position for the last card ---
+    const mm = gsap.matchMedia();
 
-    // Total height of the grid content
-    const gridHeight = testimonialGrid.scrollHeight;
+    // Desktop: keep pin + scroll-driven grid animation
+    mm.add("(min-width: 1024px)", () => {
+      const gridHeight = testimonialGrid.scrollHeight;
+      const containerHeight = flexContainer.clientHeight;
+      const maxScrollDistancePx = Math.max(gridHeight - containerHeight, 0);
+      const targetYPercent =
+        -((maxScrollDistancePx / Math.max(gridHeight, 1)) * 100) * 0.95;
+      const pinDuration = `+=${maxScrollDistancePx + containerHeight}`;
 
-    // The height of the flexContainer (the pinned element) which is equal to the viewport height
-    const containerHeight = flexContainer.clientHeight;
-
-    // The maximum possible scroll up (in pixels) is the content height minus the container height.
-    const maxScrollDistancePx = gridHeight - containerHeight;
-
-    // The ideal Y percent that makes the bottom of the grid content aligned
-    // with the bottom of the container (i.e., the last card is fully visible).
-    // We use 95% of the max scroll to ensure a slight margin at the end.
-    const targetYPercent = -((maxScrollDistancePx / gridHeight) * 100) * 0.95;
-
-    // Calculate the dynamic pin duration to match the full animation length.
-    // Adding a buffer (e.g., one viewport height) ensures the user has to scroll
-    // past the animation to unpin the section.
-    const pinDuration = `+=${maxScrollDistancePx + containerHeight}`;
-
-    // --- 2. Create the Pin Trigger ---
-    const pinTrigger = ScrollTrigger.create({
-      trigger: flexContainer,
-      start: "top top",
-      // Pin ends when the scroll distance defined by pinDuration is reached
-      end: pinDuration,
-      pin: flexContainer,
-      pinSpacing: true,
-    });
-
-    // --- 3. Create the Scroll-Driven Timeline ---
-    const cardAnimationTimeline = gsap.timeline({
-      scrollTrigger: {
+      const pinTrigger = ScrollTrigger.create({
         trigger: flexContainer,
         start: "top top",
-        end: pinDuration, // Match the end of the pin trigger
-        scrub: 1,
-      },
+        end: pinDuration,
+        pin: flexContainer,
+        pinSpacing: true,
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: flexContainer,
+          start: "top top",
+          end: pinDuration,
+          scrub: 1,
+        },
+      });
+
+      gsap.set(cards, { y: 150, opacity: 0 });
+      gsap.set(testimonialGrid, { yPercent: 0 });
+
+      tl.to(
+        testimonialGrid,
+        { yPercent: targetYPercent, duration: 5, ease: "none" },
+        0
+      ).to(
+        cards,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 3,
+          stagger: { each: 0.15, from: "start", start: 0, end: 0.8 },
+          ease: "power2.out",
+        },
+        0
+      );
+
+      return () => {
+        tl.kill();
+        pinTrigger.kill();
+      };
     });
 
-    // --- 4. Set Initial State ---
-    gsap.set(cards, { y: 150, opacity: 0 });
-    gsap.set(testimonialGrid, { yPercent: 0 });
+    // Tablet: lighter pinning with shorter distance
+    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+      // Use a gentler effect: no full-grid yPercent scroll, just reveal cards while section is pinned briefly
+      const pinTrigger = ScrollTrigger.create({
+        trigger: flexContainer,
+        start: "top top",
+        end: "+=80%",
+        pin: true,
+        pinSpacing: true,
+      });
 
-    // --- 5. Define the Animation ---
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: flexContainer,
+          start: "top top",
+          end: "+=80%",
+          scrub: 1,
+        },
+      });
 
-    // Part A: Animate the entire grid container up
-    cardAnimationTimeline.to(
-      testimonialGrid,
-      {
-        yPercent: targetYPercent, // Use the dynamically calculated percentage
-        duration: 5,
-        ease: "none",
-      },
-      0
-    );
+      gsap.set(cards, { y: 80, opacity: 0 });
 
-    // Part B: Animate the individual cards (reveal)
-    cardAnimationTimeline.to(
-      cards,
-      {
+      tl.to(cards, {
         y: 0,
         opacity: 1,
-        duration: 3,
-        stagger: {
-          each: 0.15,
-          from: "start",
-          // Ensure all cards are revealed within the first 80% of the timeline
-          // so they are fully visible before the section unpins.
-          start: 0,
-          end: 0.8,
-        },
+        duration: 1.5,
+        stagger: 0.12,
         ease: "power2.out",
-      },
-      0
-    );
+      });
 
-    // --- Cleanup function ---
+      return () => {
+        tl.kill();
+        pinTrigger.kill();
+      };
+    });
+
+    // Mobile: no pinning; per-card reveal as they scroll into view
+    mm.add("(max-width: 767px)", () => {
+      const triggers = cards.map((card) =>
+        gsap.fromTo(
+          card,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              end: "top 60%",
+              scrub: false,
+              once: true,
+            },
+          }
+        )
+      );
+
+      return () => {
+        triggers.forEach((t) => t.kill && t.kill());
+      };
+    });
+
     return () => {
-      // Kill the card animation timeline, which automatically kills its associated ScrollTrigger
-      cardAnimationTimeline.kill();
-      // Manually kill the main pin trigger as well for a clean unmount
-      pinTrigger.kill();
+      mm.revert();
     };
   }, []);
 
   return (
     <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
-        {/* The flexContainer is the element that will be pinned */}
         <div ref={flexContainerRef} className={styles.flexContainer}>
-          {/* Left Container - Text Content (Stays pinned in the center) */}
           <div className={styles.leftContainer}>
             <div className={styles.textContent}>
               <p className={styles.badge}>Testimonials</p>
@@ -184,7 +216,6 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Right Container - Testimonial Cards (Content scrolls and animates) */}
           <div className={styles.rightContainer}>
             <div ref={testimonialGridRef} className={styles.testimonialGrid}>
               {testimonialsData.map((testimonial, index) => (

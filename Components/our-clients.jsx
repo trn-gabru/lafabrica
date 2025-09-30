@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./our-clients.module.css";
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const clientLogos = [
@@ -55,64 +54,114 @@ export default function OurClients() {
 
     if (!section || !leftContainer || !rightContainer) return;
 
-    // Create timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "center center",
-        end: "+=100%",
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          //   console.log("[v0] ScrollTrigger progress:", self.progress);
+    const mm = gsap.matchMedia();
+
+    // Tablet and up: keep pinned sequence
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "center center",
+          end: "+=100%",
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
         },
-      },
+      });
+
+      gsap.set(leftContainer, { opacity: 0, y: 50 });
+      gsap.set(rightContainer, { y: 100, opacity: 0 });
+      gsap.set(logos, { y: 30, opacity: 0, scale: 0.8 });
+
+      tl.to(leftContainer, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      })
+        .to(
+          rightContainer,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          0.2
+        )
+        .to(
+          logos,
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          0.4
+        );
+
+      return () => {
+        tl.kill();
+      };
     });
 
-    // Initial states
-    gsap.set(leftContainer, { opacity: 0, y: 50 });
-    gsap.set(rightContainer, { y: 100, opacity: 0 });
-    gsap.set(logos, { y: 30, opacity: 0, scale: 0.8 });
+    // Mobile: no pin; fade logos in as they scroll
+    mm.add("(max-width: 767px)", () => {
+      gsap.set([leftContainer, rightContainer], { opacity: 0, y: 30 });
 
-    // Animation sequence
-    tl.to(leftContainer, {
-      opacity: 1,
-      y: 0,
-      duration: 0.3,
-      ease: "power2.out",
-    })
-      .to(
-        rightContainer,
-        {
-          y: 0,
+      const intro = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          end: "top 40%",
+          scrub: false,
+          once: true,
+        },
+      });
+
+      intro
+        .to(leftContainer, {
           opacity: 1,
+          y: 0,
           duration: 0.4,
           ease: "power2.out",
-        },
-        0.2
-      )
-      .to(
-        logos,
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.5,
-          stagger: 0.05, // Updated stagger time for smoother animation with more logos
-          ease: "back.out(1.7)",
-        },
-        0.4
+        })
+        .to(
+          rightContainer,
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          0.15
+        );
+
+      const logoTriggers = logos.map((el) =>
+        gsap.fromTo(
+          el,
+          { y: 20, opacity: 0, scale: 0.95 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.35,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              once: true,
+            },
+          }
+        )
       );
 
-    // Cleanup function
-    // return () => {
-    //   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    // };
+      return () => {
+        intro.kill();
+        logoTriggers.forEach((t) => t.kill && t.kill());
+      };
+    });
+
     return () => {
-      // Kill the timeline, which automatically kills its associated ScrollTrigger
-      tl.kill();
+      mm.revert();
     };
   }, []);
 
@@ -120,7 +169,6 @@ export default function OurClients() {
     <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
         <div className={styles.flexContainer}>
-          {/* Left Container - Text Content */}
           <div ref={leftContainerRef} className={styles.leftContainer}>
             <div className={styles.textContent}>
               <p className={styles.badge}>Our Clients</p>
@@ -128,14 +176,13 @@ export default function OurClients() {
                 We’re going to become partners for the long run.
               </h2>
               <p className={styles.description}>
-                While creating inspiring places for people, product team
-                which creates amazing experiences, by crafting top-notch user
+                While creating inspiring places for people, product team which
+                creates amazing experiences, by crafting top-notch user
                 experience.
               </p>
             </div>
           </div>
 
-          {/* Right Container - Client Logos */}
           <div ref={rightContainerRef} className={styles.rightContainer}>
             <div className={styles.logoGrid}>
               {clientLogos.map((logo, index) => (
