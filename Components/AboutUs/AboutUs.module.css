@@ -1,5 +1,4 @@
 /* About Us Story Component Styles */
-
 /* Main container and layout */
 .container {
   position: relative;
@@ -7,7 +6,6 @@
   overflow-x: hidden; /* Prevent horizontal overflow */
   font-family: var(--font-secondary);
 }
-
 /* Progress bar styles */
 .progressBarContainer {
   position: fixed;
@@ -18,14 +16,12 @@
   background-color: var(--secondary);
   z-index: 50;
 }
-
 .progressBar {
   height: 100%;
   background-color: var(--primary);
   transform-origin: left;
   transform: scaleX(0);
 }
-
 /* Story section base styles */
 .storySection {
   width: 100%;
@@ -34,7 +30,7 @@
   overflow: hidden;
   padding: 2rem 1rem; /* Add padding for mobile */
 }
-
+/* Story image styles */
 .storyImage {
   position: absolute;
   top: 0;
@@ -43,12 +39,13 @@
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  animation: fadeInScale 1s ease-out forwards; /* Apply fade-in animation */
 }
-
+/* Parallax background styles */
 .parallaxBg {
   /* GSAP will handle the parallax transform */
 }
-
+/* Story overlay styles */
 .storyOverlay {
   position: absolute;
   top: 0;
@@ -57,7 +54,7 @@
   height: 100%;
   z-index: 2;
 }
-
+/* Story content styles */
 .storyContent {
   position: relative;
   z-index: 3;
@@ -68,30 +65,21 @@
   max-width: 1200px; /* Add max-width constraint */
   margin: 0 auto; /* Center content */
 }
-
+/* Hero content styles */
 .heroContent {
-  background: linear-gradient(
-    to bottom,
-    var(--Primary-Gold),
-    rgba(255, 249, 237, 0)
-  );
+  background: linear-gradient(to bottom, var(--Primary-Gold), rgba(255, 249, 237, 0));
 }
-
 /* Hero section specific styles */
 .heroSection {
   background-color: var(--primary-black);
   padding: 4rem 1rem; /* Increase padding for better spacing */
 }
-
+/* Hero overlay styles */
 .heroOverlay {
   /* background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)); */
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 249, 237, 0),
-    rgb(255, 249, 237)
-  );
+  background: linear-gradient(to bottom, rgba(255, 249, 237, 0), rgb(255, 249, 237));
 }
-
+/* Hero text styles */
 .heroText {
   max-width: 800px; /* Reduce max-width for better readability */
   color: white;
@@ -99,7 +87,7 @@
   padding: 0 1rem; /* Add horizontal padding */
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
-
+/* Hero title styles */
 .heroTitle {
   font-size: clamp(2rem, 6vw, 4rem); /* Reduce font sizes significantly */
   font-family: var(--font-primary);
@@ -108,7 +96,7 @@
   text-wrap: balance;
   line-height: 1.2; /* Add line-height for better spacing */
 }
-
+/* Hero subtitle styles */
 .heroSubtitle {
   font-size: clamp(1.25rem, 3vw, 2rem); /* Reduce font sizes */
   font-weight: 300;
@@ -117,7 +105,7 @@
   opacity: 0.9;
   line-height: 1.3; /* Add line-height */
 }
-
+/* Hero description styles */
 .heroDescription {
   font-size: clamp(1rem, 2vw, 1.25rem); /* Reduce font sizes significantly */
   font-weight: 600;
@@ -127,7 +115,6 @@
   line-height: 1.6; /* Add line-height for readability */
   margin: 0 auto; /* Center text */
 }
-
 /* Chapter sections */
 .chapterSection {
   display: grid;
@@ -135,49 +122,46 @@
   min-height: 100vh; /* Use min-height */
   gap: 2rem; /* Add gap between grid items */
 }
-
 @media (min-width: 1024px) {
   .chapterSection {
     grid-template-columns: 1fr 1fr;
   }
 }
-
+/* Parallax container styles */
 .parallaxContainer {
   position: relative;
   overflow: hidden;
 }
-
+/* Section number styles */
 .sectionNumber {
   font-size: clamp(3rem, 8vw, 4rem); /* Reduce font size */
   font-family: var(--font-serif);
   font-weight: 700;
   opacity: 0.2;
 }
-
+/* Chapter content styles */
 .chapterContent {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem; /* Reduce padding and make responsive */
 }
-
 @media (min-width: 768px) {
   .chapterContent {
     padding: 3rem 2rem; /* Increase padding for larger screens */
   }
 }
-
 @media (min-width: 1024px) {
   .chapterContent {
     padding: 4rem 3rem; /* Further increase for desktop */
   }
 }
-
+/* Story text styles */
 .storyText {
   max-width: 600px; /* Reduce max-width for better readability */
   width: 100%; /* Ensure full width usage */
 }
-
+/* Chapter title styles */
 .chapterTitle {
   font-size: clamp(2rem, 5vw, 3rem); /* Significantly reduce font sizes */
   font-family: var(--font-primary);
@@ -186,94 +170,78 @@
   text-wrap: balance;
   line-height: 1.2; /* Add line-height */
 }
-
+/* Chapter description styles */
 .chapterDescription {
   font-size: clamp(1rem, 2vw, 1.125rem); /* Reduce font size */
   margin-bottom: 1.5rem;
   text-wrap: pretty;
   line-height: 1.6; /* Add line-height for readability */
 }
-
+/* Chapter subtext styles */
 .chapterSubtext {
   font-size: clamp(0.9rem, 1.8vw, 1rem); /* Reduce font size */
   text-wrap: pretty;
   line-height: 1.6; /* Add line-height */
 }
-
 /* Color variations for different sections */
 .offGoldSection {
   background-color: var(--off-gold);
   padding: 4rem 1rem; /* Add consistent padding */
 }
-
 .offGoldSection .chapterTitle {
   color: var(--primary-black);
 }
-
 .offGoldSection .chapterDescription,
 .offGoldSection .chapterSubtext {
   color: var(--muted-foreground);
 }
-
 .blackSection {
   background-color: var(--primary-black);
   padding: 4rem 1rem; /* Add consistent padding */
 }
-
 .blackSection .chapterTitle {
   color: var(--primary);
 }
-
 .blackSection .chapterDescription {
   color: rgba(255, 255, 255, 0.8);
 }
-
 .blackSection .chapterSubtext {
   color: rgba(255, 255, 255, 0.7);
 }
-
 .blueSection {
   background-color: var(--primary-blue);
   padding: 4rem 0rem; /* Add consistent padding */
 }
-
 .blueSection .chapterTitle,
 .blueSection .chapterDescription,
 .blueSection .chapterSubtext {
   color: white;
 }
-
 .blueSection .chapterDescription {
   opacity: 0.9;
 }
-
 .blueSection .chapterSubtext {
   opacity: 0.8;
 }
-
 /* Future section (final chapter) */
 .futureSection {
   background-color: var(--primary-black);
   padding: 4rem 1rem; /* Add consistent padding */
 }
-
 .futureOverlay {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
-
 .futureContent {
   text-align: center;
   max-width: 800px; /* Add max-width constraint */
   margin: 0 auto; /* Center content */
 }
-
 .futureText {
   max-width: 600px; /* Reduce max-width */
   margin: 0 auto;
   color: white;
   padding: 0 1rem; /* Add horizontal padding */
 }
-
 .futureSectionNumber {
   font-size: clamp(3rem, 8vw, 4rem); /* Reduce font size */
   font-family: var(--font-serif);
@@ -283,7 +251,6 @@
   display: block;
   margin-bottom: 2rem;
 }
-
 .futureTitle {
   font-size: clamp(2rem, 6vw, 3.5rem); /* Reduce font size significantly */
   font-family: var(--font-serif);
@@ -293,7 +260,6 @@
   text-wrap: balance;
   line-height: 1.2; /* Add line-height */
 }
-
 .futureDescription {
   font-size: clamp(1rem, 2vw, 1.25rem); /* Reduce font size */
   font-weight: 300;
@@ -302,7 +268,7 @@
   opacity: 0.9;
   line-height: 1.6; /* Add line-height */
 }
-
+/* Future actions styles */
 .futureActions {
   display: flex;
   flex-direction: column;
@@ -310,13 +276,12 @@
   justify-content: center;
   align-items: center;
 }
-
 @media (min-width: 640px) {
   .futureActions {
     flex-direction: row;
   }
 }
-
+/* Primary button styles */
 .primaryButton {
   background-color: var(--primary);
   color: var(--primary-foreground);
@@ -329,11 +294,10 @@
   border: none; /* Remove default button border */
   cursor: pointer; /* Add cursor pointer */
 }
-
 .primaryButton:hover {
   background-color: color-mix(in srgb, var(--primary) 90%, black);
 }
-
+/* Secondary button styles */
 .secondaryButton {
   border: 1px solid white;
   color: white;
@@ -346,31 +310,25 @@
   background: transparent; /* Ensure transparent background */
   cursor: pointer; /* Add cursor pointer */
 }
-
 .secondaryButton:hover {
   background-color: white;
   color: black;
 }
-
 /* Grid layout adjustments for responsive design */
 .orderFirst {
   order: 1;
 }
-
 .orderSecond {
   order: 2;
 }
-
 @media (min-width: 1024px) {
   .lgOrderFirst {
     order: 1;
   }
-
   .lgOrderSecond {
     order: 2;
   }
 }
-
 /* Section number positioning */
 .sectionNumberTopLeft {
   position: absolute;
@@ -378,14 +336,12 @@
   left: 2rem;
   z-index: 10;
 }
-
 .sectionNumberTopRight {
   position: absolute;
   top: 2rem;
   right: 2rem;
   z-index: 10;
 }
-
 /* Enhanced responsive grid styles for content sections */
 .gridContainer {
   display: grid;
@@ -395,21 +351,18 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
-
 @media (min-width: 640px) {
   .gridContainer {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
 }
-
 @media (min-width: 1024px) {
   .gridContainer {
     grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem;
   }
 }
-
 /* Card styles for grid items */
 .gridCard {
   background: white;
@@ -418,58 +371,72 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .gridCard:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
-
+/* Keyframe animation for image fade-in effect */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Mobile responsive styles for services section */
+@media (max-width: 1024px) {
+  .mobile-services {
+    display: block !important;
+  }
+  /* Hide desktop layout on mobile */
+  section[class*="offGoldSection"] > div > div > div:has(.service-card) {
+    display: none;
+  }
+}
+@media (min-width: 1025px) {
+  .mobile-services {
+    display: none !important;
+  }
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .storySection {
     min-height: auto; /* Allow natural height on mobile */
     padding: 3rem 1rem; /* Increase padding */
   }
-
   .chapterContent {
     padding: 2rem 1rem; /* Consistent mobile padding */
   }
-
   .heroText {
     padding: 0 1rem; /* Consistent padding */
   }
-
   .futureText {
     padding: 0 1rem; /* Consistent padding */
   }
 }
-
 @media (max-width: 640px) {
   .heroTitle {
     font-size: 2rem; /* Fixed smaller size for mobile */
   }
-
   .heroSubtitle {
     font-size: 1.25rem; /* Fixed smaller size */
   }
-
   .heroDescription {
     font-size: 1rem; /* Fixed smaller size */
   }
-
   .chapterTitle {
     font-size: 2rem; /* Fixed smaller size */
   }
-
   .futureTitle {
     font-size: 2rem; /* Fixed smaller size */
   }
-
   .sectionNumber,
   .futureSectionNumber {
     font-size: 3rem; /* Fixed smaller size */
   }
-
   /* Mobile-specific grid adjustments */
   .gridContainer {
     grid-template-columns: 1fr;
@@ -477,3 +444,458 @@
     padding: 0 1rem;
   }
 }
+/* Keyframes */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+/* --- Hero Section --- */
+.estBadgeContainer {
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+.estBadge {
+  position: relative;
+  background-color: rgba(255, 215, 0, 0.1);
+  backdrop-filter: blur(4px);
+  border: 2px solid var(--Off-Gold);
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+}
+.estBadgeText {
+  color: var(--Off-Gold);
+  font-family: monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.3em;
+  font-weight: bold;
+}
+.estBadgeGradient {
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 215, 0, 0.05),
+    rgba(255, 215, 0, 0.2)
+  );
+  border-radius: 9999px;
+  filter: blur(4px);
+}
+.heroButton {
+  margin-top: 3rem;
+}
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  animation: bounce 2s infinite;
+}
+.scrollIndicatorContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.scrollIndicatorText {
+  font-size: 0.875rem;
+  font-family: monospace;
+  letter-spacing: 0.2em;
+}
+.scrollIndicatorLine {
+  width: 1px;
+  height: 2rem;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+}
+/* --- Story Section --- */
+.storyImageFrame {
+  position: relative;
+  padding: 0.5rem;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 215, 0, 0.05)
+  );
+  border-radius: 0.5rem;
+  height: 100vh;
+}
+.storyImageInner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+.storyImageShadow {
+  position: absolute;
+  bottom: -1rem;
+  right: -1rem;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 215, 0, 0.1);
+  border-radius: 0.5rem;
+  z-index: -1;
+}
+.chapterIconContainer {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.chapterIcon {
+  font-size: 3.75rem;
+  color: rgba(255, 215, 0, 0.4);
+}
+.chapterParagraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+/* --- Philosophy Section --- */
+.philosophyHeader {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.philosophyIconContainer {
+  margin-bottom: 1.5rem;
+}
+.philosophyIcon {
+  font-size: 3.75rem;
+  color: rgba(255, 215, 0, 0.6);
+}
+.philosophyHeaderText {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.cardShadowEffect {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 215, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 0.5rem;
+}
+.cardContent {
+  position: relative;
+  z-index: 10;
+}
+.principleIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+.principleTitle {
+  font-size: 1.25rem;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  color: var(--primary-black);
+  margin-bottom: 1rem;
+}
+.principleDescription {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+/* --- New Services Section --- */
+.servicesContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.servicesHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.servicesIcon {
+  font-size: 3.75rem;
+  color: rgba(255, 215, 0, 0.6);
+}
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+.horizontalServiceCard {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.serviceCardImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.1);
+  z-index: 0;
+}
+.serviceCardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+  opacity: 0;
+  z-index: 1;
+}
+.serviceCardContent {
+  position: relative;
+  z-index: 2;
+}
+.serviceCardIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  display: inline-block;
+  transition: color 0.4s ease;
+}
+.serviceCardTitle {
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  color: var(--primary-black);
+  margin-bottom: 0.75rem;
+  transition: color 0.4s ease;
+}
+.serviceCardDescription {
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  transition: color 0.4s ease;
+}
+
+/* --- Why Us Section (Accordion) --- */
+.whyUsContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.whyUsHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.whyUsIconContainer {
+  margin-bottom: 1.5rem;
+}
+.whyUsIcon {
+  font-size: 3.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.accordionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.accordionItem {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.accordionButton {
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+.accordionButton:hover {
+  background-color: rgba(180, 144, 78, 0.05);
+}
+.accordionButtonContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+.accordionNumberCircle {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.accordionNumber {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.accordionTitle {
+  font-size: 1.25rem;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  color: var(--primary-black);
+  margin: 0;
+}
+.accordionChevron {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--primary);
+  transition: transform 0.3s ease;
+  transform: rotate(0deg);
+  flex-shrink: 0;
+}
+.accordionChevronOpen {
+  transform: rotate(180deg);
+}
+.accordionContentWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordionContentWrapperOpen {
+  max-height: 500px;
+}
+.accordionContent {
+  padding: 0 1.5rem 1.5rem 5rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* --- Team Section --- */
+.teamIconContainer {
+  margin-bottom: 1.5rem;
+}
+.teamIcon {
+  font-size: 3.75rem;
+  color: rgba(255, 215, 0, 0.6);
+}
+.teamParagraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.teamImageFrame {
+  position: relative;
+  padding: 0.5rem;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 215, 0, 0.05)
+  );
+  border-radius: 0.5rem;
+}
+.teamImage {
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+.teamImageShadow {
+  position: absolute;
+  bottom: -0.5rem;
+  right: -0.5rem;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 215, 0, 0.1);
+  border-radius: 0.5rem;
+  z-index: -1;
+}
+.journeyIcon {
+  font-size: 3.75rem;
+  color: rgba(255, 215, 0, 0.6);
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.timelineYearContainer {
+  flex-shrink: 0;
+}
+.timelineYearCircle {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.timelineYear {
+  color: white;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+.timelineContent {
+  flex-grow: 1;
+}
+.timelineTitle {
+  font-size: 1.125rem;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  color: var(--primary-black);
+  margin-bottom: 0.5rem;
+}
+.timelineDescription {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* --- CTA Section --- */
+.ctaButton {
+  margin-bottom: 3rem;
+}
+.ctaIconContainer {
+  margin-bottom: 2rem;
+}
+.ctaIcon {
+  font-size: 4rem;
+  color: rgba(255, 215, 0, 0.6);
+}
+.ctaInfoBox {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.ctaInfoText {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+.ctaInfoHighlight {
+  color: var(--primary);
+  font-weight: bold;
+}
+
