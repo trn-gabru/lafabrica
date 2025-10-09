@@ -156,7 +156,7 @@ export default function Navbar() {
         </div>
 
         <div className={`${styles.navContacts} ${styles.hideOnMobile}`}>
-          <Link href="/contact">
+          <Link href="/contact-us">
             <AnimatedButton label="Contact Us" symbol="→" />
           </Link>
         </div>
@@ -232,7 +232,7 @@ export default function Navbar() {
         </nav>
 
         <div className={styles.mobileContacts}>
-          <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
+          <Link href="/contact-us" onClick={() => setIsMenuOpen(false)}>
             <AnimatedButton label="Contact Us" symbol="→" />
           </Link>
         </div>

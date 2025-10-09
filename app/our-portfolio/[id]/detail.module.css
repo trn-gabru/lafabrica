@@ -1,0 +1,264 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--Off-Gold);
+}
+
+.header {
+  background-color: var(--Primary-Black);
+  color: var(--Off-Gold);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  color: var(--Primary-Gold);
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav a {
+  color: var(--Off-Gold);
+  transition: color 0.3s;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: var(--Primary-Gold);
+}
+
+.hero {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 30, 30, 0.4),
+    rgba(30, 30, 30, 0.7)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: var(--Off-Gold);
+}
+
+.heroOverlay h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--Primary-Gold);
+}
+
+.heroOverlay p {
+  font-size: 1.5rem;
+  max-width: 700px;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.introduction {
+  margin-bottom: 4rem;
+}
+
+.introduction p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--Primary-Black);
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.features {
+  margin-bottom: 4rem;
+}
+
+.features h2 {
+  font-size: 2.5rem;
+  color: var(--Primary-Black);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.featureCard h3 {
+  font-size: 1.5rem;
+  color: var(--Primary-Gold);
+  margin-bottom: 1rem;
+}
+
+.featureCard p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--Primary-Black);
+}
+
+.gallery {
+  margin-bottom: 4rem;
+}
+
+.gallery h2 {
+  font-size: 2.5rem;
+  color: var(--Primary-Black);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.galleryItem {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.galleryItem:hover img {
+  transform: scale(1.1);
+}
+
+.whyChoose {
+  margin-bottom: 4rem;
+  background-color: white;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.whyChoose h2 {
+  font-size: 2.5rem;
+  color: var(--Primary-Black);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.whyChoose p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--Primary-Black);
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta {
+  background-color: var(--Primary-Gold);
+  color: var(--Off-Gold);
+  padding: 4rem 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--Primary-Black);
+  color: var(--Off-Gold);
+  padding: 1rem 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footer {
+  background-color: var(--Primary-Black);
+  color: var(--Off-Gold);
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .heroOverlay h1 {
+    font-size: 2rem;
+  }
+
+  .heroOverlay p {
+    font-size: 1.125rem;
+  }
+
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .features h2,
+  .gallery h2,
+  .cta h2,
+  .whyChoose h2 {
+    font-size: 2rem;
+  }
+}
