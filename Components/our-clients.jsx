@@ -70,38 +70,37 @@ export default function OurClients() {
         },
       });
 
-      gsap.set(leftContainer, { opacity: 0, y: 50 });
+      // gsap.set(leftContainer, { opacity: 0, y: 50 });
       gsap.set(rightContainer, { y: 100, opacity: 0 });
       gsap.set(logos, { y: 30, opacity: 0, scale: 0.8 });
 
-      tl.to(leftContainer, {
-        opacity: 1,
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out",
-      })
-        .to(
-          rightContainer,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            ease: "power2.out",
-          },
-          0.2
-        )
-        .to(
-          logos,
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          0.4
-        );
+      // to(leftContainer, {
+      //   opacity: 1,
+      //   y: 0,
+      //   duration: 0.3,
+      //   ease: "power2.out",
+      // });
+      tl.to(
+        rightContainer,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+        },
+        0.2
+      ).to(
+        logos,
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          stagger: 0.05,
+          ease: "back.out(1.7)",
+        },
+        0.4
+      );
 
       return () => {
         tl.kill();

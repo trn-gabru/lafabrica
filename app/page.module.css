@@ -87,7 +87,9 @@
   align-items: center;
   justify-self: center;
   padding: 0 10%;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2;
   border-left: 1px dashed transparent;
   border-right: 1px dashed transparent;
   border-image: repeating-linear-gradient(

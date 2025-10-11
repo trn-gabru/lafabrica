@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import styles from "./footer.module.css";
 import AnimatedButton from "./animated-button";
+import { useRouter } from "next/navigation";
 
 const FlipLink = ({ children, href, className = "" }) => {
   const DURATION = 0.25;
@@ -72,6 +73,11 @@ const FlipLink = ({ children, href, className = "" }) => {
 };
 
 export default function Footer() {
+  const router = useRouter();
+
+  const handleContactClick = () => {
+    router.push(`/contact-us`);
+  };
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -95,7 +101,11 @@ export default function Footer() {
             </div>
           </div>
           {/* <button className={styles.contactButton}>Contact Us</button> */}
-          <AnimatedButton label="Contact Us" symbol="→" />
+          <AnimatedButton
+            label="Contact Us"
+            symbol="→"
+            onClick={() => handleContactClick()}
+          />
         </div>
 
         {/* Navigation and Contact Section */}

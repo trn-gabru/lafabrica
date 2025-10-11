@@ -1,13 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./image-slider.module.css";
 import AnimatedButton from "./animated-button";
 
 export default function ImageSlider() {
   const [currentSection, setCurrentSection] = useState(0);
+  const [sections, setSections] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const router = useRouter();
 
-  const sections = [
+  // Fallback data in case API fails or returns empty
+  const fallbackSections = [
     {
       backgroundImage: "/images/image10.jpg",
       card: {
@@ -43,12 +49,80 @@ export default function ImageSlider() {
   ];
 
   useEffect(() => {
+    const fetchSliderData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/portfolio");
+        const data = await response.json();
+
+        if (data.success && data.items && data.items.length > 0) {
+          // Take first 4 portfolio items for the slider
+          const sliderItems = data.items.slice(0, 4);
+
+          // Transform API data to match component structure
+          const transformedSections = sliderItems.map((item) => ({
+            backgroundImage:
+              item.images && item.images.length > 0
+                ? item.images[0].url
+                : "/images/default.jpg",
+            card: {
+              title: item.title,
+              description: item.hero_subheading || item.introduction || "",
+            },
+            slug: item.slug, // Store slug for potential navigation
+          }));
+          setSections(transformedSections);
+        } else {
+          // Use fallback data if API returns empty or fails
+          setSections(fallbackSections);
+        }
+      } catch (err) {
+        console.error("Error fetching slider data:", err);
+        setError("Failed to load slider data");
+        // Use fallback data on error
+        setSections(fallbackSections);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSliderData();
+  }, []);
+
+  const handleSeeMore = (slug) => {
+    if (slug) {
+      router.push(`/our-portfolio/${slug}`);
+    }
+  };
+
+  useEffect(() => {
+    if (sections.length === 0) return;
+
     const interval = setInterval(() => {
       setCurrentSection((prev) => (prev + 1) % sections.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [sections.length]);
+
+  if (loading) {
+    return (
+      <div
+        className={styles.heroSection}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "600px",
+        }}
+      >
+        <div style={{ textAlign: "center", color: "white" }}>
+          <div className={styles.spinner}></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.heroSection}>
@@ -87,7 +161,11 @@ export default function ImageSlider() {
                 <p className={styles.cardDescription}>
                   {section.card.description}
                 </p>
-                <AnimatedButton label="Get Quote" symbol="→" />
+                <AnimatedButton
+                  label="See More"
+                  symbol="➜"
+                  onClick={() => handleSeeMore(section.slug)}
+                />
               </div>
             </div>
           </div>

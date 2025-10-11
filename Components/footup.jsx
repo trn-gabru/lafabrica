@@ -4,6 +4,7 @@ import { useEffect } from "react";
 // Link import removed as it's not used
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 
 // Ensure ScrollTrigger is registered only once
 if (typeof window !== "undefined") {
@@ -15,6 +16,12 @@ import styles from "./footup.module.css";
 import AnimatedButton from "./animated-button";
 
 function Footup() {
+  const router = useRouter();
+
+  const handleContactClick = () => {
+    router.push(`/contact-us`);
+  };
+
   useEffect(() => {
     // 💡 FIX: Declare the array to hold ScrollTrigger references.
     const footupTriggers = [];
@@ -151,7 +158,11 @@ function Footup() {
           </div>
           <div className={styles.btn}>
             {/* <button>Get Pro</button> */}
-            <AnimatedButton label="Contact Us" symbol="→" />
+            <AnimatedButton
+              label="Contact Us"
+              symbol="→"
+              onClick={() => handleContactClick()}
+            />
           </div>
         </div>
         {generateRows()}

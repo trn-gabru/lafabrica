@@ -70,17 +70,21 @@
 }
 
 .heroOverlay h1 {
+  font-family: var(--font-primary);
+  font-weight: 500;
   font-size: 3rem;
   margin-bottom: 1rem;
   color: var(--Primary-Gold);
 }
 
 .heroOverlay p {
-  font-size: 1.5rem;
+  font-family: var(--font-secondary);
+  font-size: 1.2rem;
   max-width: 700px;
 }
 
 .main {
+  font-family: var(--font-secondary);
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 2rem;
@@ -105,6 +109,8 @@
 
 .features h2 {
   font-size: 2.5rem;
+  font-family: var(--font-primary);
+
   color: var(--Primary-Black);
   text-align: center;
   margin-bottom: 3rem;
@@ -130,6 +136,8 @@
 }
 
 .featureCard h3 {
+  font-family: var(--font-secondary);
+
   font-size: 1.5rem;
   color: var(--Primary-Gold);
   margin-bottom: 1rem;
@@ -143,6 +151,8 @@
 
 .gallery {
   margin-bottom: 4rem;
+  font-family: var(--font-primary);
+  font-weight: 500;
 }
 
 .gallery h2 {
@@ -185,6 +195,8 @@
 }
 
 .whyChoose h2 {
+  font-family: var(--font-primary);
+  font-weight: 500;
   font-size: 2.5rem;
   color: var(--Primary-Black);
   text-align: center;
@@ -192,6 +204,8 @@
 }
 
 .whyChoose p {
+  font-family: var(--font-secondary);
+  font-weight: 500;
   font-size: 1.125rem;
   line-height: 1.8;
   color: var(--Primary-Black);
@@ -210,11 +224,14 @@
 }
 
 .cta h2 {
+  font-family: var(--font-primary);
+  font-weight: 500;
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
 .cta p {
+  font-family: var(--font-secondary);
   font-size: 1.25rem;
   margin-bottom: 2rem;
 }
@@ -228,6 +245,7 @@
   font-weight: 600;
   font-size: 1.125rem;
   transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
 }
 
 .ctaButton:hover {

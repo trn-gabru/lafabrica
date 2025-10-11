@@ -72,7 +72,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(30, 30, 30, 0.5), rgba(30, 30, 30, 0.7));
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 30, 30, 0.5),
+    rgba(30, 30, 30, 0.7)
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,13 +88,16 @@
 
 .heroOverlay h1 {
   font-size: 4rem;
+  font-family: var(--font-primary);
   color: var(--Primary-Gold);
   margin-bottom: 1rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .heroOverlay p {
   font-size: 1.5rem;
+  font-family: var(--font-secondary);
+
   max-width: 700px;
   margin-bottom: 2rem;
 }
@@ -128,6 +135,8 @@
 }
 
 .infoContent h2 {
+  font-family: var(--font-primary);
+  font-weight: 500;
   font-size: 3rem;
   color: var(--Primary-Black);
   text-align: center;
@@ -159,12 +168,15 @@
 }
 
 .infoCard h3 {
+  font-family: var(--font-primary);
+  font-weight: 500;
   font-size: 1.5rem;
   color: var(--Primary-Gold);
   margin-bottom: 1rem;
 }
 
 .infoCard p {
+  font-family: var(--font-secondary);
   font-size: 1rem;
   color: var(--Primary-Black);
   line-height: 1.6;
@@ -179,6 +191,8 @@
 
 .mainTitle {
   font-size: 3rem;
+  font-family: var(--font-primary);
+  font-weight: 500;
   color: var(--Primary-Black);
   text-align: center;
   margin-bottom: 4rem;
@@ -213,10 +227,10 @@
   flex-direction: column;
 }
 
-.portfolioCard:hover {
+/* .portfolioCard:hover {
   transform: translateY(-12px);
   box-shadow: 0 20px 40px rgba(180, 144, 78, 0.2);
-}
+} */
 
 .cardImageContainer {
   position: relative;
@@ -262,6 +276,8 @@
 }
 
 .cardTitle {
+  font-family: var(--font-primary);
+  font-weight: 100;
   font-size: 1.75rem;
   color: var(--Primary-Black);
   margin-bottom: 1rem;
@@ -270,6 +286,8 @@
 }
 
 .cardDescription {
+  font-family: var(--font-secondary);
+
   font-size: 1rem;
   color: #666;
   line-height: 1.7;
@@ -282,6 +300,7 @@
 }
 
 .cardLink {
+  font-family: var(--font-secondary);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -291,6 +310,7 @@
   transition: all 0.3s;
   border-bottom: 2px solid transparent;
   padding-bottom: 0.25rem;
+  text-decoration: none;
 }
 
 .cardLink:hover {
@@ -320,6 +340,7 @@
 }
 
 .spinner {
+  font-family: var(--font-secondary);
   width: 50px;
   height: 50px;
   border: 4px solid var(--Off-Gold);
@@ -337,6 +358,7 @@
 
 .loadingContainer p,
 .emptyContainer p {
+  font-family: var(--font-secondary);
   font-size: 1.25rem;
   color: var(--Primary-Black);
 }
@@ -366,6 +388,8 @@
 }
 
 .adminLink {
+  font-family: var(--font-secondary);
+
   display: inline-block;
   margin-top: 1rem;
   color: var(--Primary-Gold);
@@ -383,6 +407,7 @@
   color: var(--Off-Gold);
   padding: 4rem 2rem;
   text-align: center;
+  font-family: var(--font-secondary);
 }
 
 .cta h2 {
@@ -404,6 +429,7 @@
   font-weight: 600;
   font-size: 1.125rem;
   transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
 }
 
 .ctaButton:hover {

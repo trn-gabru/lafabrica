@@ -24,6 +24,7 @@
   --Primary-Gold: #b4904e;
   --Primary-Black: #1e1e1e;
   --Off-Gold: #fff9ed;
+  /* --Off-Gold: #fff; */
   --Primary-Blue: #00a0e3;
 }
 
@@ -250,8 +251,8 @@
 
 .cards-container {
   position: relative;
-  width: 60%;
-  height: 80%;
+  width: 80%;
+  height: 90%;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -264,7 +265,7 @@
   overflow: hidden;
 }
 
-.tag {
+/* .tag {
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -281,7 +282,7 @@
   font-size: 12px;
   font-weight: 600;
   line-height: 1;
-}
+} */
 
 @media (max-width: 1000px) {
   .cards-container {
